@@ -12,8 +12,10 @@ Usage:
 
 CMD:
   usage         Show this help
-  validate      Validate each projects
+  clone         Clone collections from repos.txt
+  docs          Generate static documentation
   status        Show git status
+  info          List of managed repos
   CMD           Forward command to be executed in each dir
 EOF
 }
@@ -29,8 +31,49 @@ prj_st ()
   git status -sb | grep -v '??'
 }
 
+prj_clone ()
+{
+  local repos=$(cat repos.txt)
 
-#set -x
+  for repo in $repos; do
+
+    name=${repo##*/}
+    name=${name%.git}
+
+    if [[ -d "$name" ]]; then
+      >&2 echo "Updating repo $name ..."
+      git -C "$name" fetch -a
+      git -C "$name" pull
+    else
+      git clone "$repo" "$name"
+    fi
+
+  done
+}
+
+targets ()
+{
+  local repos=$(cat repos.txt)
+
+  for repo in $repos; do
+    name=${repo##*/}
+    name=${name%.git}
+    echo "$name"
+  done
+}
+
+
+gen_docs ()
+{
+  rm -rf build/collections/
+  for target in $(targets); do
+    paasify document_collection $target --out build/collections/$target
+  done
+  echo "Documentation generated in: build/collections"
+}
+
+
+
 main ()
 {
   #local tests="barbu barbu_auth barbu_hr barbu_internal_prod barbu_public_prod"
@@ -53,11 +96,22 @@ main ()
 
     # Select command shortcuts
     case "$cmd" in
+      clone|update)
+        shift || true
+        prj_clone
+        return
+        ;;
+      docs|gen_doc*)
+        shift || true
+        gen_docs
+        return
+        ;;
+
       st|status)
         shift || true
         cmd=prj_st
         ;;
-      show)
+      info)
         echo "INFO:   Normal order: $tests"
         echo "INFO: Reversed order: $(reverse $tests)"
         exit 
