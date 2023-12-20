@@ -34,30 +34,17 @@ extra_javascript:
 nav:
     - Overview:
       - collections/*/index.md
+    - Apps:
+      - collections/*/*/*.md
 
-    - Apps: 
-      - Overview: collections.md
-      - Collections:
-        - collections/*
-
-    - About:
-      - Overview: develop/ref.md
-      - refs/changelog.md
-      - Code of conduct: develop/conduct_code.md
-      - refs/license.md
-
-      - Contribute:
-        - Overview: develop/intro.md
-        - develop/install.md
-        - develop/paasify.md
-        - develop/docs.md
-        - develop/release.md
-
-      - Python API:
-        - refs/schema_app.md
-        - refs/python_api_app.md
-        - refs/python_api_project.md
-        - refs/python_api_other.md
+        #    - About:
+        #      - Overview: develop/ref.md
+        #      - refs/changelog.md
+        #      - Code of conduct: develop/conduct_code.md
+        #      - refs/license.md
+        #
+        #      - Contribute:
+        #        - Overview: develop/intro.md
 
 
 # https://squidfunk.github.io/mkdocs-material/setup/adding-a-git-repository/

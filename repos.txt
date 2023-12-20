@@ -1,5 +1,6 @@
-git@github.com:barbu-it/mrjk-paasify-collection-official.git
-git@github.com:barbu-it/paasify-collection-community.git
-git@github.com:barbu-it/paasify-collection-games.git
-git@github.com:barbu-it/paasify-collection-infra.git
-git@github.com:barbu-it/paasify-collection-lscr.git
+#git@github.com:barbu-it/mrjk-paasify-collection-official.git
+#git@github.com:barbu-it/paasify-collection-community.git
+#git@github.com:barbu-it/paasify-collection-games.git
+#git@github.com:barbu-it/paasify-collection-infra.git
+#git@github.com:barbu-it/paasify-collection-lscr.git
+git@github.com:mrjk/paasify-collection.git

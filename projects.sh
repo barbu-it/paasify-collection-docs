@@ -65,13 +65,19 @@ targets ()
 
 gen_docs ()
 {
-  rm -rf build/collections/
+  rm -rf src/collections/
   for target in $(targets); do
-    paasify document_collection $target --out build/collections/$target
+    paasify document_collection $target --out src/collections/$target
   done
-  echo "Documentation generated in: build/collections"
+  echo "Documentation generated in: src/collections"
 }
 
+serve_docs ()
+{
+  local listen=${1:-127.0.0.1:8001}
+  mkdocs serve -a $listen
+
+}
 
 
 main ()
@@ -101,9 +107,14 @@ main ()
         prj_clone
         return
         ;;
-      docs|gen_doc*)
+      doc|gen_doc*)
         shift || true
         gen_docs
+        return
+        ;;
+      serve|serve_doc*)
+        shift || true
+        serve_docs $args
         return
         ;;
 
